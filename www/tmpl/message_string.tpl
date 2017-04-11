@@ -1,0 +1,1 @@
+<p classs="message">%message%</p>

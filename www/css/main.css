@@ -1,0 +1,112 @@
+body {
+    margin:0;
+    padding:0;
+}
+
+.clear {
+    clear: both;
+}
+
+#left {
+    float:left;
+}
+
+#right {
+    float:right;
+}
+
+#left, #right {
+    padding: 0 10px;
+    width: 230px;
+}
+
+#center {
+    margin: 0 250px;
+    padding: 0 10px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#center h2 {
+    margin: 0;
+    padding: 10px 0;
+}
+
+#center .article {
+    border-top: 1px solid black;
+}
+
+#center .article h2 {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+hr {
+    margin: 0;
+}
+
+#header {
+    text-align: center;
+}
+
+#header img {
+    width: 70px;
+    vertical-align: bottom;
+}
+
+#center h2 img {
+    width: 50px;
+    vertical-align: bottom;
+}
+
+#left img {
+    width: 30px;
+    vertical-align: -5px;
+}
+
+.banner {
+    border: solid 1px black;
+    margin-bottom: 10px;
+    max-width: 150px;
+}
+
+#pagination a {
+    display: inline-block;
+    padding: 0 5px;
+}
+
+#pagination p {
+    text-align: center;
+    margin: 0;
+    padding: 5px 0;
+}
+
+#footer{
+    text-align: center;
+    border-top: 1px solid black;
+    margin: 0;
+}
+
+#register table {
+    margin: 0 auto;
+}
+
+#search {
+    text-align: center;
+}
+
+#search li {
+    list-style: none;
+}
+
+.message {
+    color: #f00;
+    text-align: center;
+}
+
+#message {
+    text-align:center;
+}

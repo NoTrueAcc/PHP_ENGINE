@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Основы PHP</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+</head>
+<body>
+<div id="content">
+    <div id="header">
+        <h2>Шапка сайта</h2>
+    </div>
+    <hr>
+    <div id="main-content">
+        <div id="left">
+            <h2>Меню</h2>
+            <ul>
+                <li>
+                    <a href="#">Главная</a>
+                </li>
+                <li>
+                    <a href="#">Строковые функции</a>
+                </li>
+                <li>
+                    <a href="#">Математические функции</a>
+                </li>
+                <li>
+                    <a href="#">Функции даты и времени</a>
+                </li>
+            </ul>
+            <h2>Вход на сайт</h2>
+            <form id="auth" action="#" method="post">
+                <table>
+                    <tr>
+                        <td>
+                            Логин:
+                        </td>
+                        <td>
+                            <input type="text" name="login">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Пароль:
+                        </td>
+                        <td>
+                            <input type="password" name="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" name="auth" value="Войти">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a href="#">Зарегистрироваться</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="right">
+            <form name="search" action="#" method="get">
+                <p>
+                    Поиск: <input type="text" name="words">
+                </p>
+                <p>
+                    <input type="submit" name="search" value="Искать">
+                </p>
+            </form>
+            <h2>Реклама</h2>
+            <div class="banner">Тут первый баннер</div>
+            <div class="banner">Тут второй баннер</div>
+        </div>
+        <div id="center">
+            <div id="search">
+                %search_result%
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div id="footer">
+            <p>Все права защищены &copy; 2017</p>
+        </div>
+    </div>
+</body>
+</html>
