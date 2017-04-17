@@ -19,7 +19,7 @@
             $this->config = new Config();
             $this->valid = new checkValid();
             $this->mysqli = new mysqli($this->config->host, $this->config->user, $this->config->password, $this->config->db);
-            $this->mysqli->query('SET NAMES "utf-8"');
+            $this->mysqli->query('SET NAMES UTF8');
         }
 
         private function query($query)
@@ -37,7 +37,7 @@
                 }
             }
 
-            $fields = explode(",", $fields);
+            $fields = implode(",", $fields);
             $tableName = $this->config->db_prefix . $tableName;
 
             if(!$order)
@@ -130,6 +130,16 @@
             }
 
             return false;
+        }
+
+        public function updateOnId($tablename, $id, $updateFields)
+        {
+            if(!$this->valid->validId($id))
+            {
+                return false;
+            }
+
+            return $this->update($tablename, $updateFields, "`id` = $id");
         }
 
         public function delete($tableName, $where)
@@ -251,7 +261,7 @@
             }
         }
 
-        public function getElementOnId($tableName, $tableOut, $id)
+        public function getElementOnId($tableName, $id)
         {
             if(!$this->existsId($tableName, $id))
             {

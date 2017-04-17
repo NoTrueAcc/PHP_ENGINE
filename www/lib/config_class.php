@@ -8,7 +8,7 @@
 
 class Config {
     var $siteName = 'Test.Local';
-    var $address = 'http://test.local';
+    var $address = 'http://alextest.local';
     var $secret = 'dog9999';
     var $host = 'localhost';
     var $db = 'mybase';
@@ -18,7 +18,9 @@ class Config {
     var $admName = 'Alex';
     var $admEmail = 'coooooller@mail.ru';
     var $dirText = "lib/text/";
-    var $dirImages = "images/articles/";
+    var $dirImages = "images/";
+    var $dirTmpl = "tmpl/";
+    var $countBlog = 3;
 
     var $minLogin = 3;
     var $maxLogin = 30;

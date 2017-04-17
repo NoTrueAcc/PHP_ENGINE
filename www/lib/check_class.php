@@ -58,7 +58,7 @@ class checkValid {
         {
             return false;
         }
-        elseif(!preg_match('/^\-?(([1-9][0-9]*) | 0)$/', $number))
+        elseif(!preg_match('/^\-?([1-9][0-9]*)|0$/', $number))
         {
             return false;
         }
@@ -116,4 +116,66 @@ class checkValid {
         }
 
     }
+
+    public function validTitle($value)
+    {
+        if(!is_string($value) || !$this->validString($value,3,255))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function validIntroText($value)
+    {
+        if(!is_string($value))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function validFullText($value)
+    {
+        if(!is_string($value))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function validMetaDesc($value)
+    {
+        if(!is_string($value) || !$this->validString($value, 3, 255))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function validMetaKey($value)
+    {
+        if(!is_string($value) || !$this->validString($value, 3, 255))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function validImageSrc($value)
+    {
+        if(!is_string($value) || !$this->validString($value, 3, 255))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+
 }

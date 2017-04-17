@@ -40,7 +40,7 @@ class User extends globalClass
         }
     }
 
-    public function isExists($login)
+    public function isExistsLogin($login)
     {
         return $this->isExists("login", $login);
     }

@@ -27,7 +27,7 @@
 
         protected function edit($id, $updateFields)
         {
-            return $this->db->updateOnId($this->tableName, $id, $updateFields);
+            return $this->db->updateOnID($this->tableName, $id, $updateFields);
         }
 
         public function delete($id)

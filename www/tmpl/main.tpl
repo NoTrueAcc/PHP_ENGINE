@@ -4,19 +4,19 @@
 <head>
     <title>%title%</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="%address%css/main.css" type="text/css">
+    <link rel="stylesheet" href="%address%/css/main.css" type="text/css">
     <meta name="description" content="%meta_description%">
     <meta name="keywords" content="%meta_key%">
 </head>
 <body>
 <div id="content">
     <div id="header">
-        <h1><img src="%address%images/php_logo.png" alt="php">Шапка сайта</h1>
+        <h1><img src="%address%/images/php_logo.png" alt="php">Шапка сайта</h1>
     </div>
     <hr>
     <div id="main-content">
         <div id="left">
-            <h2><img src="%address%images/menu-icon.png" alt="menu"> Меню</h2>
+            <h2><img src="%address%/images/menu-icon.png" alt="menu"> Меню</h2>
             <ul>%menu%</ul>
             %auth_user%
             </div>
