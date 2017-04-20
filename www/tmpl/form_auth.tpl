@@ -25,7 +25,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <a href="#">Зарегистрироваться</a>
+                <a href="%address%?view=reg">Зарегистрироваться</a>
             </td>
         </tr>
     </table>

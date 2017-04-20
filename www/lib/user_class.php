@@ -15,15 +15,15 @@ class User extends globalClass
         parent::__construct("users", $db);
     }
 
-    public function addUser($login, $password, $regDate)
+    public function addUser($login, $password, $regDate, $email, $email_hash)
     {
-        if(!$this->checkValid($login, $password,$regDate))
+        if(!$this->checkValid($login, $password, $regDate))
         {
             return false;
         }
         else
         {
-            return $this->add(array("login" => $login, "password" => $password, "regdate" => $regDate));
+            return $this->add(array("login" => $login, "password" => $password, "regdate" => $regDate, "email" => $email, "email_hash" => $email_hash));
         }
 
     }
@@ -43,6 +43,23 @@ class User extends globalClass
     public function isExistsLogin($login)
     {
         return $this->isExists("login", $login);
+    }
+
+    public function isExistsEmail($email)
+    {
+        return $this->isExists("email", $email);
+    }
+
+    public function validMailHash($hash)
+    {
+        if($this->isExists("email_hash", $hash))
+        {
+            $this->setField("email_hash", "", "email_hash", $hash);
+
+            return true;
+        }
+
+        return false;
     }
 
     public function getUserOnLogin($login)

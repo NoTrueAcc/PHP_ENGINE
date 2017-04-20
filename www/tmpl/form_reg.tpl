@@ -1,12 +1,12 @@
 <form id="register" action="functions.php" method="post">
-    $message%
+    %message%
     <table>
         <tr>
             <td>
                 Логин:
             </td>
             <td>
-                <input type="text" name="login">
+                <input type="text" name="login" value="%login%">
             </td>
         </tr>
         <tr>
@@ -18,8 +18,16 @@
             </td>
         </tr>
         <tr>
+            <td>
+                E-mail:
+            </td>
+            <td>
+                <input type="email" name="email">
+            </td>
+        </tr>
+        <tr>
             <td >
-                <img src="captcha.php" alt="Каптча">
+                <img src="%address%/captcha.php" alt="Каптча">
             </td>
         </tr>
         <tr>

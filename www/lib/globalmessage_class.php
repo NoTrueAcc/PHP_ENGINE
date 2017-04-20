@@ -15,12 +15,20 @@
 
         public function getTitle($name)
         {
-            return $this->data[$name . "_TITLE"];
+            if(!empty($name)) {
+                return $this->data[$name . "_TITLE"];
+            }
+
+            return "";
         }
 
         public function getText($name)
         {
-            return $this->data[$name . "_TEXT"];
+            if(!empty($name)) {
+                return $this->data[$name . "_TEXT"];
+            }
+
+            return "";
         }
     }
 

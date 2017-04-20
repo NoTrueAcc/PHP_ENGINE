@@ -78,6 +78,7 @@
                 return false;
             }
             $i = 0;
+            $data = array();
             while($row = $resultSet->fetch_assoc())
             {
                 $data[$i] = $row;
@@ -92,10 +93,10 @@
         public function insert($tableName, $newValues)
         {
             $tableName = $this->config->db_prefix . $tableName;
-            $query = "INSERT INTO $tableName (";
+            $query = "INSERT INTO `$tableName` (";
                 foreach ($newValues as $field => $value)
                 {
-                    $query = "`" . $field . "`,";
+                    $query .= "`" . $field . "`,";
                 }
 
                 $query = substr($query, 0, -1);
@@ -115,16 +116,17 @@
         {
             $tableName = $this->config->db_prefix . $tableName;
 
-            $query = "UPDATE $tableName SET ";
+            $query = "UPDATE `$tableName` SET ";
             foreach ($updateFields as $field => $value)
             {
-                $query .= "`$field` = '" . addslashes($value) . "'";
-                $query = substr($query, 0, -1);
+                $query .= "`$field` = '" . addslashes($value) . "',";
             }
+
+            $query = substr($query, 0, -1);
 
             if($where)
             {
-                $query .= "WHERE $where";
+                $query .= " WHERE $where";
 
                  return $this->query($query);
             }
@@ -246,7 +248,7 @@
 
         public function setField($tableName, $field, $value, $fieldIn, $valueIn)
         {
-            return $this->update($tableName, array($field => $value), "WHERE `$fieldIn` = '" . addslashes($valueIn) . "'");
+            return $this->update($tableName, array($field => $value), " `$fieldIn` = '" . addslashes($valueIn) . "'");
         }
 
         public function setFieldOnId($tableName, $id, $field, $value)

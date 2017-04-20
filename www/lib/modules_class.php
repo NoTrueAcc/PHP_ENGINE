@@ -1,4 +1,4 @@
-<?php
+    <?php
 
     require_once "config_class.php";
     require_once "article_class.php";
@@ -7,6 +7,7 @@
     require_once "menu_class.php";
     require_once "banner_class.php";
     require_once "message_class.php";
+    require_once "mail_class.php";
 
     abstract class Modules
     {
@@ -46,8 +47,18 @@
                     $data[$key] = htmlspecialchars($value);
                 }
 
-                return $data;
             }
+
+            return $data;
+        }
+
+        protected function getMessage()
+        {
+            $message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
+            unset($_SESSION['message']);
+            $str['message'] = $this->message->getText($message);
+
+            return $this->getReplaceTemplate($str, "message_string");
         }
 
         public function getContent()
@@ -84,6 +95,14 @@
             }
 
             return $text;
+        }
+
+        protected function getCheckMailResult()
+        {
+            $data = isset($this->data['checkdata']) ? $this->user->validMailHash($this->data['checkdata']) : false;
+
+            return  $data;
+
         }
 
         protected function getAuthUser()

@@ -35,6 +35,11 @@
             return $this->db->deleteOnId($this->tableName, $id);
         }
 
+        public function setField($field, $value, $fieldIn, $valueIn)
+        {
+            return $this->db->setField($this->tableName, $field, $value, $fieldIn, $valueIn);
+        }
+
         public function deleteAll()
         {
             return $this->db->deleteAll($this->tableName);
@@ -87,9 +92,8 @@
 
         protected function isExists($field, $value)
         {
-            return $this->db->isExists($this->tableName);
+            return $this->db->isExists($this->tableName, $field, $value);
         }
-
     }
 
 ?>

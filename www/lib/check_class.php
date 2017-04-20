@@ -33,14 +33,13 @@ class checkValid {
             return false;
         }
 
-        return $this->validString($login, $this->config->minLogin, $this->config->naxLogin);
+        return $this->validString($login, $this->config->minLogin, $this->config->maxLogin);
     }
 
     public function validHash($hash)
     {
-        if($this->validString($hash, 32, 32) || !$this->isOnlyLettersAndDigits($hash))
+        if(!$this->validString($hash, 32, 32) || !$this->isOnlyLettersAndDigits($hash))
         {
-
             return false;
         }
 
