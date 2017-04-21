@@ -19,6 +19,7 @@
         protected $banner;
         protected $message;
         protected $data;
+        protected $userInfo;
 
         public function __construct($db)
         {
@@ -32,6 +33,15 @@
             $this->banner = new Banner($db);
             $this->message = new Message($db);
             $this->data = $this->secureData($_GET);
+            $this->userInfo = $this->getUser();
+        }
+
+        private function getUser()
+        {
+            $login = isset($_SESSION['login']) ? $_SESSION['login'] : "";
+            $password = isset($_SESSION['password']) ? $_SESSION['password'] : "";
+
+            return ($this->user->checkUser($login, $password)) ? $this->user->getUserOnLogin($login) : false;
         }
 
         private function secureData($data)
@@ -52,10 +62,13 @@
             return $data;
         }
 
-        protected function getMessage()
+        protected function getMessage($message = "")
         {
-            $message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
-            unset($_SESSION['message']);
+            if($message == "") {
+                $message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
+                unset($_SESSION['message']);
+            }
+
             $str['message'] = $this->message->getText($message);
 
             return $this->getReplaceTemplate($str, "message_string");
@@ -107,7 +120,22 @@
 
         protected function getAuthUser()
         {
-            $str["message_auth"] = "";
+            if(!empty($this->userInfo))
+            {
+                $str['username'] = $this->userInfo['login'];
+
+                return $this->getReplaceTemplate($str, "user_panel");
+            }
+
+            if(isset($_SESSION['error_auth']))
+            {
+                $str["message_auth"] = $this->getMessage("ERROR_AUTH");
+                unset($_SESSION['error_auth']);
+            }
+            else
+            {
+                $str["message_auth"] = "";
+            }
 
             return $this->getReplaceTemplate($str, 'form_auth');
     }

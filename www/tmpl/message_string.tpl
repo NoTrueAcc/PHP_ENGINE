@@ -1,1 +1,1 @@
-<p classs="message">%message%</p>
+<p class="message">%message%</p>

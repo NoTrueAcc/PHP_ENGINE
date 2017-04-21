@@ -91,6 +91,36 @@ class Manage
         }
     }
 
+    public function login()
+    {
+        $login = $this->data['login'];
+        $password = $this->data['password'];
+        $password = $this->hashPassword($password);
+        $r = $_SERVER['HTTP_REFERER'];
+
+        if($this->user->checkUser($login, $password))
+        {
+            $_SESSION['login'] = $login;
+            $_SESSION['password'] = $password;
+
+            return $r;
+        }
+        else
+        {
+            $_SESSION['error_auth'] = 1;
+
+            return $r;
+        }
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['login']);
+        unset($_SESSION['password']);
+
+        return $_SERVER['HTTP_REFERER'];
+    }
+
     private function hashPassword($password)
     {
         return md5($password . $this->config->secret);

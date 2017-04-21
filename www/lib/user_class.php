@@ -62,6 +62,13 @@ class User extends globalClass
         return false;
     }
 
+    public function checkUser($login, $password)
+    {
+        $user = $this->getUserOnLogin($login);
+
+        return empty($user) ? false : ($user['password'] === $password);
+    }
+
     public function getUserOnLogin($login)
     {
         $id = $this->getField("id", "login", $login);

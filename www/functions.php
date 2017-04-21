@@ -17,6 +17,14 @@ if(isset($_POST['reg']))
 {
     $r = $manage->regUser();
 }
+elseif(isset($_POST['auth']))
+{
+    $r = $manage->login();
+}
+elseif (isset($_GET['logout']))
+{
+    $r = $manage->logout();
+}
 else
 {
     exit();
