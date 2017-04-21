@@ -127,7 +127,7 @@
                 return $this->getReplaceTemplate($str, "user_panel");
             }
 
-            if(isset($_SESSION['error_auth']))
+            if(isset($_SESSION['error_auth']) && $_SESSION['error_auth'] == 1)
             {
                 $str["message_auth"] = $this->getMessage("ERROR_AUTH");
                 unset($_SESSION['error_auth']);
