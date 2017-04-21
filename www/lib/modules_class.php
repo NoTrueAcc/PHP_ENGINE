@@ -122,14 +122,23 @@
         {
             if(!empty($this->userInfo))
             {
+                $str["message_auth"] = "";
                 $str['username'] = $this->userInfo['login'];
+
+                if(isset($_SESSION['error_auth']) && $_SESSION['error_auth'] == 2)
+                {
+                    $str["message_auth"] = $this->getMessage("ERROR_EMAIL_CHECKED_AUTH");
+                }
 
                 return $this->getReplaceTemplate($str, "user_panel");
             }
 
-            if(isset($_SESSION['error_auth']) && $_SESSION['error_auth'] == 1)
+            if(isset($_SESSION['error_auth']))
             {
-                $str["message_auth"] = $this->getMessage("ERROR_AUTH");
+                if($_SESSION['error_auth'] == 1) {
+                    $str["message_auth"] = $this->getMessage("ERROR_ON_AUTH");
+                }
+
                 unset($_SESSION['error_auth']);
             }
             else

@@ -103,6 +103,11 @@ class Manage
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
 
+            if(!$this->user->emailIsChecked($login))
+            {
+                $_SESSION['error_auth'] = 2;
+            }
+
             return $r;
         }
         else
@@ -117,6 +122,7 @@ class Manage
     {
         unset($_SESSION['login']);
         unset($_SESSION['password']);
+        unset($_SESSION['error_auth']);
 
         return $_SERVER['HTTP_REFERER'];
     }

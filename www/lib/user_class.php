@@ -62,6 +62,16 @@ class User extends globalClass
         return false;
     }
 
+    public function emailIsChecked($login)
+    {
+        if(!empty($this->getField('email_hash', 'login', $login)))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public function checkUser($login, $password)
     {
         $user = $this->getUserOnLogin($login);
