@@ -62,14 +62,41 @@ class User extends globalClass
         return false;
     }
 
-    public function emailIsChecked($login)
+    public function setRestorePassField($email)
     {
-        if(!empty($this->getField('email_hash', 'login', $login)))
+        $secret = md5($email . $this->config->secret);
+
+        $this->setField('restore_pass', $secret, 'email', $email);
+    }
+
+    public function emailIsChecked($field, $value)
+    {
+        if(!empty($this->getField('email_hash', $field , $value)))
         {
             return false;
         }
 
         return true;
+    }
+
+    public function restorePassIsExists($restorePassHash)
+    {
+        if(empty($restorePassHash) || !$this->isExists('restore_pass', $restorePassHash))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getIdOnField($field, $value)
+    {
+        if(!empty($this->getField('id', $field, $value)))
+        {
+            return $this->getField('id', $field, $value);
+        }
+
+        return false;
     }
 
     public function checkUser($login, $password)

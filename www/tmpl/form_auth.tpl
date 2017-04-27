@@ -28,5 +28,10 @@
                 <a href="%address%?view=reg">Зарегистрироваться</a>
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <a href="%address%?view=restorepass">Забыли пароль?</a>
+            </td>
+        </tr>
     </table>
 </form>

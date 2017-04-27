@@ -203,6 +203,16 @@
             return $this->getReplaceTemplate($els, 'pagination');
         }
 
+        protected function checkDataOnMailRestore()
+        {
+            if(empty($this->data['checkdatamail']) || !$this->user->restorePassIsExists($this->data['checkdatamail']))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         protected function formatDate($time)
         {
             return date("H-m-d H:i:s", $time);

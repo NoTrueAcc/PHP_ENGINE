@@ -9,7 +9,7 @@
 require_once "modules_class.php";
 require_once "config_class.php";
 
-class mailContent extends Modules
+class  restorePassContent extends Modules
 {
     private $messageTitle;
     private $messageText;
@@ -19,25 +19,15 @@ class mailContent extends Modules
         parent::__construct($db);
     }
 
-
     protected function getTitle()
     {
-        $this->messageTitle = "Проверка почты";
+        $this->messageTitle = "Восстановление пароля";
         return $this->messageTitle;
     }
 
     protected function getDescription()
     {
-        if($this->getCheckMailResult())
-        {
-            $this->messageText = "Email успешно прошел проверку";
-        }
-        else
-        {
-            $this->messageText = "Неизвестная ошибка";
-        }
-
-        $this->messageText .= "<br><a href='" . $this->config->address . "'>Вернуться на главную страницу</a>";
+        $this->messageText = "Для восстановления пароля введите Ваш email.";
         return $this->messageText;
     }
 
@@ -48,8 +38,9 @@ class mailContent extends Modules
 
     protected function getMiddle()
     {
+        $str['message'] = $this->getMessage();
         $str['title'] = $this->messageTitle;
         $str['text'] = $this->messageText;
-        return $this->getReplaceTemplate($str, 'checkmail');
+        return $this->getReplaceTemplate($str, 'restore_pass');
     }
 }

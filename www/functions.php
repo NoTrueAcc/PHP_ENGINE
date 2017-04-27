@@ -25,6 +25,14 @@ elseif (isset($_GET['logout']))
 {
     $r = $manage->logout();
 }
+elseif(isset($_POST['restorepass']))
+{
+    $r = $manage->restorePassword();
+}
+elseif(isset($_POST['restorepassonemail']))
+{
+    $r = $manage->restorePassOnEmail();
+}
 else
 {
     exit();

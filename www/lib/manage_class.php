@@ -84,7 +84,7 @@ class Manage
             //mail::sendCheckMail($email, $login, $checkMailPage);
 
             return $this->returnPageMessage("SUCCESS_REG", $this->config->address . "?view=message");
-        }
+    }
         else
         {
             return $this->unknownError($linkReg);
@@ -103,7 +103,7 @@ class Manage
             $_SESSION['login'] = $login;
             $_SESSION['password'] = $password;
 
-            if(!$this->user->emailIsChecked($login))
+            if(!$this->user->emailIsChecked('login', $login))
             {
                 $_SESSION['error_auth'] = 2;
             }
@@ -115,6 +115,70 @@ class Manage
             $_SESSION['error_auth'] = 1;
 
             return $r;
+        }
+    }
+
+    public function restorePassword()
+    {
+        $linkRestore = $this->config->address . "?view=restorepass";
+        $captcha = $this->data['captcha'];
+
+        if(!isset($_SESSION['rand']) || ($_SESSION['rand'] != $captcha) || empty($_SESSION['rand']))
+        {
+            return $this->returnMessage("ERROR_CAPTCHA", $linkRestore);
+        }
+
+        $email = $this->data['email'];
+
+        if(!$this->user->isExistsEmail($email))
+        {
+            return $this->returnMessage("EMAIL_IS_NOT_EXISTS_ON_RESTORE", $linkRestore);
+        }
+        elseif (!$this->user->emailIsChecked('email', $email))
+        {
+            return $this->returnMessage("ERROR_RESTORE_PASS_ON_EMAIL_CHECKED", $linkRestore);
+        }
+        else
+        {
+            $this->user->setRestorePassField($email);
+            $restoreMailPage = $this->config->address . "?view=restoremailpage";
+            mail::sendRestoreMail($email, $restoreMailPage);
+
+            return $this->returnMessage("SUCCESS_RESTORE_PASS_ON_EMAIL", $linkRestore);
+        }
+    }
+
+    public function restorePassOnEmail()
+    {
+        $linkRestoreOnEmail = $this->config->address . "?view=restoremailpage&checkdatamail=" . $this->data['secret'];
+        $linkMessage = $this->config->address . "?view=message";
+
+        $pass_1 = isset($this->data['pass_1']) ? $this->data['pass_1'] : "";
+        $pass_2 = isset($this->data['pass_2']) ? $this->data['pass_2'] : "";
+
+        if(empty($pass_1) || empty($pass_2))
+        {
+            return $this->returnMessage("ANY_FIELD_EMPTY", $linkRestoreOnEmail);
+        }
+
+        if($pass_1 != $pass_2)
+        {
+            return $this->returnMessage("ERROR_PASS_EQUABILITY_ON_EMAIL_RESTORE", $linkRestoreOnEmail);
+        }
+
+        if($pass_1 == $pass_2)
+        {
+            if(empty($this->data['secret']) || !$this->user->restorePassIsExists($this->data['secret']))
+            {
+                return $this->returnPageMessage('UNKNOWN_ERROR', $linkMessage);
+            }
+            else{
+                $password = $this->hashPassword($pass_1);
+                $this->user->setField('password', $password, 'restore_pass', $this->data['secret']);
+                $this->user->setField('restore_pass', "", 'restore_pass', $this->data['secret']);
+
+                return $this->returnPageMessage("RESTORE_PASS_ON_EMAIL_SUCCESS", $linkMessage);
+            }
         }
     }
 
