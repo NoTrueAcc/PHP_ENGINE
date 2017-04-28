@@ -1,2 +1,2 @@
 <h2>Результат поиска</h2>
-<ol>$search_item%</ol>
+<ol>%search_items%</ol>

@@ -16,7 +16,8 @@ require_once "lib/regcontent_class.php";
 require_once "lib/messagecontent_class.php";
 require_once "lib/mailcontent_class.php";
 require_once "lib/restorepasscontent_class.php";
-require_once "lib/restorepassonemail_class.php";
+require_once "lib/restorepassonemailcontent_class.php";
+require_once "lib/searchcontent_class.php";
 
 $db = new dataBase();
 $view = isset($_GET['view']) ? $_GET['view'] : "";
@@ -46,6 +47,9 @@ switch ($view)
         break;
     case "restoremailpage" :
         $content = new restorePassOnEmailContent($db);
+        break;
+    case "search" :
+        $content = new searchContent($db);
         break;
     default : exit;
 }

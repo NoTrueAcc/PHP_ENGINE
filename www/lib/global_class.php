@@ -94,6 +94,11 @@
         {
             return $this->db->isExists($this->tableName, $field, $value);
         }
+
+        protected function search($words, $fields)
+        {
+            return $this->db->search($this->tableName, $words, $fields);
+        }
     }
 
 ?>

@@ -131,4 +131,9 @@ class Article extends globalClass
 
         return $this->setFieldOnId($id, 'img_src', $value);
     }
+
+    public function searchArticles($words)
+    {
+        return $this->search($words, array('title', 'full_text'));
+    }
 }
