@@ -16,6 +16,11 @@ class ArticleContent extends Modules
     {
         parent::__construct($db);
         $this->article_info = $this->article->get($this->data["id"]);
+
+        if(!$this->article_info)
+        {
+            $this->notFound();
+        }
     }
 
 

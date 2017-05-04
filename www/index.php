@@ -18,6 +18,7 @@ require_once "lib/mailcontent_class.php";
 require_once "lib/restorepasscontent_class.php";
 require_once "lib/restorepassonemailcontent_class.php";
 require_once "lib/searchcontent_class.php";
+require_once "lib/notfoundcontent_class.php";
 
 $db = new dataBase();
 $view = isset($_GET['view']) ? $_GET['view'] : "";
@@ -51,7 +52,8 @@ switch ($view)
     case "search" :
         $content = new searchContent($db);
         break;
-    default : exit;
+    default :
+        $content = new notFoundContent($db);
 }
 
 echo $content->getContent();

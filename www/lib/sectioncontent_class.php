@@ -19,7 +19,12 @@ class SectionContent extends Modules
         parent::__construct($db);
         $this->articles = $this->article->getAllSectionId($this->data["id"]);
         $this->section_info = $this->section->get($this->data["id"]);
+        if(!$this->section_info)
+        {
+            $this->notFound();
+        }
         $this->page = isset($this->data["page"]) ? $this->data["page"] : 1;
+        $this->pageNotFound($this->page, count($this->articles));
     }
 
 

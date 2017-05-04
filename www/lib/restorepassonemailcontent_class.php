@@ -48,7 +48,7 @@ class  restorePassOnEmailContent extends Modules
         }
         else
         {
-            exit();
+            $this->notFound();
         }
     }
 }

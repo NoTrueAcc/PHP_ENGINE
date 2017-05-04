@@ -44,10 +44,19 @@ class searchContent extends Modules
             return $this->getTemplate('search_notfound');
         }
 
+        $words = explode(" ", $this->words);
+
         for($i = 0; $i < count($results); $i++)
         {
             $str['link'] = $this->config->address . "?view=article&amp;id=" . $results[$i]['id'];
             $str['title'] = $results[$i]['title'];
+
+            foreach ($words as $key => $value)
+            {
+                $results[$i]['full_text'] = str_replace($value, "<b>" . $value . "</b>", $results[$i]['full_text']);
+            }
+
+            $str['text'] = $results[$i]['full_text'];
 
             $text .= $this->getReplaceTemplate($str, 'search_item');
         }

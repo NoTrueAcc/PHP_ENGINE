@@ -254,6 +254,25 @@
 
             return str_replace($search, $replace, $content);
         }
+
+        protected function redirect($link)
+        {
+            header("Location: $link");
+            exit();
+        }
+
+        protected function notFound()
+        {
+            $this->redirect($this->config->address . "?view=notfound");
+        }
+
+        protected function pageNotFound($page, $countPages)
+        {
+            if(($page <= 0) || ($page > $countPages))
+            {
+                $this->redirect($this->config->address . "?view=notfound");
+            }
+        }
     }
 
 ?>
